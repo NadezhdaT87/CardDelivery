@@ -21,16 +21,16 @@ public class CardDeliveryTest {
     @Test
     void testSubmittingFormPositiveData() {
         Selenide.open("http://localhost:9999");
-        $("[data-test-id='city']input").setValue("Рязань");
+        $("[data-test-id='city'] input").setValue("Рязань");
         String planningData = generateData(4, "dd.MM.yyyy");
-        $("[data-test-id='date']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
-        $("[data-test-id='date']").setValue(planningData);
-        $("[data-test-id='name']").setValue("Надежда Тарасова");
-        $("[data-test-id='phone']").setValue("+77777777777");
+        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
+        $("[data-test-id='date'] input").setValue(planningData);
+        $("[data-test-id='name'] input").setValue("Надежда Тарасова");
+        $("[data-test-id='phone'] input").setValue("+77777777777");
         $("[data-test-id='agreement']").click();
-        $("button").click();
-        $("notification__content")
+        $("button.button").click();
+        $(".notification__content")
                 .shouldBe(Condition.visible, Duration.ofSeconds(15))
-                .shouldHave(Condition.text("Встреча успешно забронирована на" + planningData));
+                .shouldHave(Condition.text("Встреча успешно забронирована на " + planningData));
     }
 }
